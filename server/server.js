@@ -8,8 +8,9 @@ const connectdb = require("./utils/db.js");
 const errorMiddleware = require("./middlewares/error-middlewares.js");
 
 const corsOptions = {
-    origin: "http://localhost:5174",
+    origin: "http://localhost:5173",
     methods: "GET,POST,PATCH,DELETE,PUT,HEAD",
+    allowedHeaders: ["Authorization", "Content-Type"],
     credentials: true
 };
 

@@ -17,6 +17,8 @@ export const AuthProvider = ({ children }) => {
         setToken("");
         return localStorage.removeItem("token");
     }
+    console.log("isLoggedIn",isLoggedIn);
+    
 
     //tackling logout functionality
     return (<AuthContext.Provider value={{ storeTokeninLS,isLoggedIn,LogoutUser,token }}>
