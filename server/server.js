@@ -4,6 +4,7 @@ const app = express();
 const cors = require("cors");
 const authRoute = require("./router/auth-router.js");
 const contactRoute = require("./router/contact-router.js");
+const serviceRoute = require("./router/service-router.js");
 const connectdb = require("./utils/db.js");
 const errorMiddleware = require("./middlewares/error-middlewares.js");
 
@@ -18,6 +19,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/form", contactRoute);
+app.use("/api/data", serviceRoute);
 app.use(errorMiddleware);
 
 const PORT = 5000;
