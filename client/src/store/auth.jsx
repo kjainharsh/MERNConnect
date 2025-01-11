@@ -6,6 +6,7 @@ export const AuthProvider = ({ children }) => {
 
     const [token, setToken] = useState(localStorage.getItem("token"));
     const [user, setUser] = useState("");
+    const [services, setServices] = useState([]);
 
     const storeTokeninLS = (serverToken) => {
         console.log("token", serverToken);
@@ -41,11 +42,28 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    const getServices = async () => {
+        try {
+            const response = await fetch("http://localhost:5000/api/data/service", {
+                method: "GET",
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data.msg);
+                setServices(data.msg);
+            }
+        } catch (error) {
+            console.log(` services frontend error ${error}`);
+        }
+    };
+
     useEffect(() => {
         userAuthentication();
+        getServices();
     }, []);
     //tackling logout functionality
-    return (<AuthContext.Provider value={{ storeTokeninLS,isLoggedIn,LogoutUser,token,user }}>
+    return (<AuthContext.Provider value={{ storeTokeninLS, isLoggedIn, LogoutUser, token, user, services }}>
         {children}
     </AuthContext.Provider>);
 };
