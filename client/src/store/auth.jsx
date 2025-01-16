@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
             const response = await fetch("http://localhost:5000/api/auth/user", {
                 method: "GET",
                 headers: {
-                    Authorization: authorizationToken,
+                    Authorization: `Bearer ${token}`,
                 },
             });
             if (response.ok) {

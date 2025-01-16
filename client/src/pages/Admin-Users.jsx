@@ -21,6 +21,22 @@ export const AdminUsers = () => {
         }
     }
 
+    const deleteUser = async (id) => {
+        try {
+            const response = await fetch(`http://localhost:5000/api/admin/users/delete/${id}`, {
+                method: "DELETE",
+                headers: { Authorization: authorizationToken },
+            });
+
+            if (response.ok) {
+                getAllUsersData();
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     useEffect(() => {
         getAllUsersData();
     }, []);
@@ -53,7 +69,7 @@ export const AdminUsers = () => {
                                             Edit
                                         </td>
                                         <td>
-                                            Harsh
+                                            <button onClick={()=>deleteUser(curUser._id)}>Delete</button>
                                         </td>
                                     </tr>
                                 );
