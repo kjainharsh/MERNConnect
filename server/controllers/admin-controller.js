@@ -22,6 +22,15 @@ const deleteUserByID = async (req, res,next) => {
         next(error);        
     }
 }
+const deleteContactByID = async (req, res,next) => {
+    try {
+        const id = req.params.id;
+        await Contact.deleteOne({ _id: id });
+        return res.status(200).json({ message: "Contact Delete Successfully" });
+    } catch (error) {
+        next(error);        
+    }
+}
 
 const getUserByID = async (req, res, next) => {
     try {
@@ -58,4 +67,4 @@ const getAllContacts = async (req, res, next) => {
     }
 }
 
-module.exports = { getAllUsers, getAllContacts, deleteUserByID, getUserByID, updateUserById };
+module.exports = { getAllUsers, getAllContacts, deleteUserByID, getUserByID, updateUserById, deleteContactByID };
