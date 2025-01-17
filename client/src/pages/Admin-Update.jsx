@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../store/auth";
+import { toast } from "react-toastify";
 
 export const AdminUpdate = () => {
 
@@ -48,7 +49,30 @@ export const AdminUpdate = () => {
         });
     };
 
-    const handleSubmit = () => {};
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch(`http://localhost:5000/api/admin/users/update/${params.id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type":"application/json",
+                    Authorization: authorizationToken
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                toast.success("Updated Successfully");
+            }
+            else {
+                toast.error("Not Updated");
+            }
+
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <section className="section-contact">
